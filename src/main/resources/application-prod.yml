@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cdi_stats
+    username: postgres
+    password: postgres
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+    properties:
+      hibernate:
+        temp.use_jdbc_metadata_defaults: false
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
