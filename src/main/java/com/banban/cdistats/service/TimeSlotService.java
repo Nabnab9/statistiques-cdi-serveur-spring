@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.Month;
 import java.time.Year;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TimeSlotService {
@@ -22,5 +24,13 @@ public class TimeSlotService {
 
     public Optional<TimeSlot> findByNameAndDayOfWeek(String name, DayOfWeek dayOfWeek) {
         return timeSlotRepository.findByNameAndDayOfWeek(name, dayOfWeek);
+    }
+
+    public Set<TimeSlot> findByName(String name) {
+        return timeSlotRepository.findByName(name);
+    }
+
+    public List<TimeSlot> findAll() {
+        return timeSlotRepository.findAll();
     }
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 public class TimeSlot {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     private String name;

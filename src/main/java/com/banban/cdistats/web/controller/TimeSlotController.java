@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.DayOfWeek;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -22,10 +23,7 @@ public class TimeSlotController {
     }
 
     @GetMapping("/time-slots")
-    public TimeSlot findByNameAndDayOfWeek(
-            @RequestParam("tsName") String name
-    , @RequestParam("tsDayOfWeek")DayOfWeek dayOfWeek) {
-        return timeSlotService.findByNameAndDayOfWeek(name, dayOfWeek)
-                .orElseThrow(() -> new RuntimeException("Time slot not found with name: " + name +" in day of week :"+dayOfWeek));
+    public List<TimeSlot> findAll() {
+        return timeSlotService.findAll();
     }
 }

@@ -1,16 +1,21 @@
 package com.banban.cdistats.web.controller;
 
 import com.banban.cdistats.model.Activity;
+import com.banban.cdistats.model.TimeSlot;
 import com.banban.cdistats.service.ActivityService;
 import com.banban.cdistats.service.TimeSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 @RestController
+@CrossOrigin
 public class ActivityController {
 
     private final ActivityService activityService;
@@ -24,12 +29,9 @@ public class ActivityController {
     }
 
     @PostMapping("/activity")
-    public Activity findByNameAndDayOfWeek() {
-        return activityService.save(new Activity()
-                .setStudentAmount(25)
-                .setDateTime(LocalDateTime.now())
-                .setTimeSlot(timeSlotService
-                        .findByNameAndDayOfWeek("am_1", DayOfWeek.MONDAY)
-                        .orElseThrow(RuntimeException::new)));
+    public Activity saveActivity(@RequestBody Activity a) {
+        TimeSlot ts = timeSlotService.findByNameAndDayOfWeek(a.getTimeSlot().getName(), a.getTimeSlot().getDayOfWeek()).orElseThrow(EntityNotFoundException::new);
+        a.setTimeSlot(ts);
+        return activityService.save(a);
     }
 }
