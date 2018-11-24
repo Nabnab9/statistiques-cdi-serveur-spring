@@ -8,7 +8,7 @@ public class Activity {
 
 
     public enum ClosingReason {
-        CLOSED, STRIKE, OTHER, OPEN
+        CLOSED, STRIKE, OTHER, OPENED
     }
 
     @Id
@@ -22,7 +22,7 @@ public class Activity {
     private boolean isSupport = false;
 
     @Enumerated(EnumType.STRING)
-    private ClosingReason closingReason = ClosingReason.OPEN;
+    private ClosingReason closingReason = ClosingReason.OPENED;
 
     private LocalDateTime dateTime;
 
